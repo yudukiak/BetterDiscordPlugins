@@ -1,7 +1,7 @@
 BetterDiscordのプラグイン
 =====
 
-BetterDiscordで利用できるプラグイン集集です。
+[BetterDiscord](https://github.com/rauenzi/BetterDiscordApp/releases)で利用できるプラグイン集集です。
 
 BetterDiscordの利用方法については各自調べてください。
 
@@ -17,6 +17,6 @@ BetterDiscordの利用方法については各自調べてください。
 
 ### [changeTimestampInMessage.plugin.js](https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/changeTimestampInMessage.plugin.js)
 - [ブログ](https://prfac.com/change-timestamp-in-message/)
-- チャットの日付を「1月1日(火) 10時30分」表記にします。 
+- チャットの日付を「1月1日(火) 10時30分」表記にします。  
   昨年以前の場合は「2018年1月1日(月) 10時30分」表記になります。
 - 設定はありません。

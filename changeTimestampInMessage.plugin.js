@@ -26,16 +26,6 @@ ctm.whatTimeIsIt = (t) => {
   })();
   return result;
 };
-ctm.hoverEdited = () => {
-  $('time.da-edited').on('mouseenter', () => {
-    const element = $('.da-tooltip');
-    const text = $(element).text();
-    if (reg.test(text)) return;
-    const date = $(this).attr('datetime');
-    const dateRep = ctm.whatTimeIsIt(date);
-    $('.da-tooltip').text(dateRep);
-  });
-};
 ctm.prototype.start = () => ctm.log('start', ctm.prototype.getVersion());
 ctm.prototype.load = () => ctm.log('load', ctm.prototype.getVersion());
 ctm.prototype.unload = () => ctm.log('unload', ctm.prototype.getVersion());
@@ -44,17 +34,26 @@ ctm.prototype.onMessage = () => {};
 ctm.prototype.onSwitch = () => {};
 ctm.prototype.observer = (e) => {
   const target = e.target;
-  const trgClassList = target.classList;
-  if (trgClassList != null && /da-(app|systemPad|directionColumn)/.test(trgClassList.value)) {
-    $(target).find('time.da-timestampCozy, time.da-timestamp').each((index, element) => {
+  const classList = target.classList;
+  if (classList != null && /da-(app|systemPad|directionColumn|layerContainer)/.test(classList.value)) {
+    $(target).find('time.da-timestampCozy, time.da-timestamp, .da-tooltip').each((index, element) => {
       const text = $(element).text();
       if (reg.test(text)) return;
-      const date = $(element).attr('datetime');
-      const dateRep = ctm.whatTimeIsIt(date);
-      $(element).text(dateRep);
+      if ($(element).hasClass('da-tooltip')) {
+        $('time.da-edited:hover').each((hoverIndex, hoverElement) => {
+          const date = $(hoverElement).attr('datetime');
+          const dateRep = ctm.whatTimeIsIt(date);
+          const html = $(element).context.outerHTML;
+          const htmlRep = html.replace(/\d+\/\d+\/\d+/, dateRep);
+          $(element).parent().html(htmlRep);
+        });
+      } else {
+        const date = $(element).attr('datetime');
+        const dateRep = ctm.whatTimeIsIt(date);
+        $(element).text(dateRep);
+      }
     });
   }
-  ctm.hoverEdited();
 };
 ctm.prototype.getName = () => 'Change timestamp in message';
 ctm.prototype.getDescription = () => {
@@ -64,6 +63,6 @@ ctm.prototype.getDescription = () => {
   const oldTime = ctm.whatTimeIsIt(oldDate);
   return `チャットの日付を「${nowTime}」表記にします。\n昨年以前の場合は「${oldTime}」表記になります。`;
 };
-ctm.prototype.getVersion = () => '1.0.0';
+ctm.prototype.getVersion = () => '1.0.1';
 ctm.prototype.getAuthor = () => 'micelle';
 

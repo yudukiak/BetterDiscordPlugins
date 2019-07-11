@@ -44,7 +44,7 @@ ctm.prototype.observer = (e) => {
           const date = $(hoverElement).attr('datetime');
           const dateRep = ctm.whatTimeIsIt(date);
           const html = $(element).context.outerHTML;
-          const htmlRep = html.replace(/\d+\/\d+\/\d+/, dateRep);
+          const htmlRep = html.replace(/<\/div>.+<\/div>/, `</div>${dateRep}</div>`);
           $(element).parent().html(htmlRep);
         });
       } else {
@@ -63,6 +63,6 @@ ctm.prototype.getDescription = () => {
   const oldTime = ctm.whatTimeIsIt(oldDate);
   return `チャットの日付を「${nowTime}」表記にします。\n昨年以前の場合は「${oldTime}」表記になります。`;
 };
-ctm.prototype.getVersion = () => '1.0.1';
+ctm.prototype.getVersion = () => '1.0.2';
 ctm.prototype.getAuthor = () => 'micelle';
 

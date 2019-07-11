@@ -21,3 +21,8 @@ BetterDiscordの利用方法については各自調べてください。
 - チャットの日付を「1月1日(火) 10時30分」表記にします。  
   昨年以前の場合は「2018年1月1日(月) 10時30分」表記になります。
 - 設定はありません。
+
+### [replaceGifIcon.plugin.js](https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/replaceGifIcon.plugin.js)
+![replaceGifIcon](https://prfac.com/wp-content/uploads/2019/07/ezgif-1-333bbc239b4f.gif)
+- 静止画になっているアイコンを全てGIFアニメーションのアイコンに置き換えます。
+- 設定はありません。

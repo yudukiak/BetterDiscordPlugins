@@ -16,7 +16,7 @@ ReplaceGifIcon.prototype.observer = (e) => {
   // .da-image: アイコン
   // .da-avatarSmall: 通話中のリスト
   // .stop-animation: 自分のアイコン
-  $('body').find('.da-image, .da-avatarSmall, .stop-animation').each((index, element) => {
+  $('.da-image, .da-avatarSmall, .stop-animation').each((index, element) => {
     // チェック済みは処理しない
     const name = ReplaceGifIcon.prototype.getName();
     if($(element).data(name)) return;
@@ -42,5 +42,5 @@ ReplaceGifIcon.prototype.observer = (e) => {
 };
 ReplaceGifIcon.prototype.getName = () => 'ReplaceGifIcon';
 ReplaceGifIcon.prototype.getDescription = () => 'GIFアニメーションのアイコンに置き換えます。\nReplace with an GIF animated icon.';
-ReplaceGifIcon.prototype.getVersion = () => '1.0.1';
+ReplaceGifIcon.prototype.getVersion = () => '1.0.2';
 ReplaceGifIcon.prototype.getAuthor = () => 'micelle';

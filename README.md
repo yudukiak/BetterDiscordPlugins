@@ -1,7 +1,7 @@
 BetterDiscordのプラグイン
 =====
 
-[BetterDiscord](https://github.com/rauenzi/BetterDiscordApp/releases)で利用できるプラグイン集集です。
+[BetterDiscord](https://github.com/rauenzi/BetterDiscordApp/releases)で利用できるプラグインです。
 
 BetterDiscordの利用方法については各自調べてください。
 

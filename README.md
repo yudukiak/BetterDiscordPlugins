@@ -27,3 +27,11 @@ BetterDiscordの利用方法については各自調べてください。
 - 静止画になっているアイコンを全てGIFアニメーションのアイコンに置き換えます。
 - 難点はConsoleに`GET https://cdn.discordapp.com/avatars/000/abc.gif?size=128 415`と表示されてしまう点のみ。
 - 設定はありません。
+
+### [ConnectionTime.plugin.js](https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/ConnectionTime.plugin.js)
+![ConnectionTime](https://prfac.com/wp-content/uploads/2019/07/ezgif-1-55b590270dbe.gif)
+- ボイスチャンネルに接続している時間を表示します。
+- [ConnectionTime.plugin.js](https://gist.github.com/katabame/ef65c6379c8d50af8702c5932c6dbf5b)を参考にしました。
+- 設定はありません。
+- Displays how long connected to VoiceChannel.
+- Support English.

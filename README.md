@@ -38,3 +38,10 @@ BetterDiscordの利用方法については各自調べてください。
 - 設定はありません。
 - Displays how long connected to VoiceChannel.
 - Support English.
+
+### v1.0.0 [Twemoji.plugin.js](https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/Twemoji.plugin.js)
+![Twemoji](https://prfac.com/wp-content/uploads/2019/07/0d40a5e4a645fc6b96e767d64ac0878e.gif)
+- 絵文字をTwemojiで置換します。
+- 設定はありません。
+- Replace Emoji with Twemoji.
+- Support English.

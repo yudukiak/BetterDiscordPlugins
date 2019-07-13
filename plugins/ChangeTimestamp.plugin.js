@@ -1,11 +1,11 @@
 //META{"name":"ChangeTimestamp","displayName":"micelle","website":"https://github.com/micelle","source":"https://github.com/micelle/dc_BetterDiscordPlugins"}*//
 
 const ChangeTimestamp = function() {};
-ChangeTimestamp.prototype.log = (msg, data) => {
-  const name = ChangeTimestamp.prototype.getName();
+ChangeTimestamp.prototype.log = function(msg, data) {
+  const name = this.getName();
   console.log(`%c[${name}] ${msg}`, 'color:#C9242F', data);
-}
-ChangeTimestamp.prototype.whatTimeIsIt = (t) => {
+};
+ChangeTimestamp.prototype.whatTimeIsIt = function(t) {
   const date = (() => {
     if (t == null) return new Date();
     if (/^(\d+)$/.test(t)) return new Date(Number(t));
@@ -21,19 +21,23 @@ ChangeTimestamp.prototype.whatTimeIsIt = (t) => {
   const weekStr = ['日', '月', '火', '水', '木', '金', '土'][week];
   const nowYear = new Date().getFullYear();
   const text = `${month}月${day}日(${weekStr}) ${hours}時${minutes}分`;
-  const result = (() => {
-    if (year === nowYear) return text;
-    return `${year}年${text}`;
-  })();
-  return result;
+  return (year === nowYear) ? text : `${year}年${text}`;
 };
-ChangeTimestamp.prototype.start = () => ChangeTimestamp.prototype.log('start', ChangeTimestamp.prototype.getVersion());
-ChangeTimestamp.prototype.load = () => ChangeTimestamp.prototype.log('load', ChangeTimestamp.prototype.getVersion());
-ChangeTimestamp.prototype.unload = () => ChangeTimestamp.prototype.log('unload', ChangeTimestamp.prototype.getVersion());
-ChangeTimestamp.prototype.stop = () => ChangeTimestamp.prototype.log('stop', ChangeTimestamp.prototype.getVersion());
-ChangeTimestamp.prototype.onMessage = () => {};
-ChangeTimestamp.prototype.onSwitch = () => {};
-ChangeTimestamp.prototype.observer = (e) => {
+ChangeTimestamp.prototype.start = function() {
+  this.log('start', this.getVersion());
+};
+ChangeTimestamp.prototype.load = function() {
+  this.log('load', this.getVersion());
+};
+ChangeTimestamp.prototype.unload = function() {
+  this.log('unload', this.getVersion());
+};
+ChangeTimestamp.prototype.stop = function() {
+  this.log('stop', this.getVersion());
+};
+ChangeTimestamp.prototype.onMessage = function() {};
+ChangeTimestamp.prototype.onSwitch = function() {};
+ChangeTimestamp.prototype.observer = function(e) {
   const target = e.target;
   const classList = target.classList;
   if (classList != null && /da-(app|systemPad|directionColumn|layerContainer)/.test(classList.value)) {
@@ -43,27 +47,26 @@ ChangeTimestamp.prototype.observer = (e) => {
       if ($(element).hasClass('da-tooltip')) {
         $('time.da-edited:hover').each((hoverIndex, hoverElement) => {
           const date = $(hoverElement).attr('datetime');
-          const dateRep = ChangeTimestamp.prototype.whatTimeIsIt(date);
+          const dateRep = this.whatTimeIsIt(date);
           const html = $(element).context.outerHTML;
           const htmlRep = html.replace(/<\/div>.+<\/div>/, `</div>${dateRep}</div>`);
           $(element).parent().html(htmlRep);
         });
       } else {
         const date = $(element).attr('datetime');
-        const dateRep = ChangeTimestamp.prototype.whatTimeIsIt(date);
+        const dateRep = this.whatTimeIsIt(date);
         $(element).text(dateRep);
       }
     });
   }
 };
 ChangeTimestamp.prototype.getName = () => 'ChangeTimestamp';
-ChangeTimestamp.prototype.getDescription = () => {
-  const nowTime = ChangeTimestamp.prototype.whatTimeIsIt();
+ChangeTimestamp.prototype.getDescription = function() {
+  const nowTime = this.whatTimeIsIt();
   const oldDate = new Date();
   oldDate.setFullYear(oldDate.getFullYear() - 1);
-  const oldTime = ChangeTimestamp.prototype.whatTimeIsIt(oldDate);
+  const oldTime = this.whatTimeIsIt(oldDate);
   return `チャットの日付を「${nowTime}」表記にします。\n昨年以前の場合は「${oldTime}」表記になります。`;
 };
-ChangeTimestamp.prototype.getVersion = () => '1.0.3';
+ChangeTimestamp.prototype.getVersion = () => '1.0.4';
 ChangeTimestamp.prototype.getAuthor = () => 'micelle';
-

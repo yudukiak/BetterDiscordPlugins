@@ -15,7 +15,7 @@ BetterDiscordの利用方法については各自調べてください。
 
 ## プラグイン
 
-### [ChangeTimestamp.plugin.js](https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/ChangeTimestamp.plugin.js)
+### v1.0.4 [ChangeTimestamp.plugin.js](https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/ChangeTimestamp.plugin.js)
 ![ChangeTimestamp](https://prfac.com/wp-content/uploads/2019/07/0d40a5e4a645fc6b96e767d64ac0878e-1.jpg)
 - [ブログ](https://prfac.com/change-timestamp-in-message/)
 - チャットの日付を「1月1日(火) 10時30分」表記にします。  
@@ -23,7 +23,7 @@ BetterDiscordの利用方法については各自調べてください。
 - 設定はありません。
 - Not support English.
 
-### [ReplaceGifIcon.plugin.js](https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/ReplaceGifIcon.plugin.js)
+### v1.0.3 [ReplaceGifIcon.plugin.js](https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/ReplaceGifIcon.plugin.js)
 ![ReplaceGifIcon](https://prfac.com/wp-content/uploads/2019/07/ezgif-1-333bbc239b4f.gif)
 - 静止画になっているアイコンを全てGIFアニメーションのアイコンに置き換えます。
 - 難点はConsoleに`GET https://cdn.discordapp.com/avatars/000/abc.gif?size=128 415`と表示されてしまう点のみ。
@@ -31,7 +31,7 @@ BetterDiscordの利用方法については各自調べてください。
 - Replace with an GIF animated icon.
 - Support English.
 
-### [ConnectionTime.plugin.js](https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/ConnectionTime.plugin.js)
+### v1.0.0 [ConnectionTime.plugin.js](https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/ConnectionTime.plugin.js)
 ![ConnectionTime](https://prfac.com/wp-content/uploads/2019/07/ezgif-1-55b590270dbe.gif)
 - ボイスチャンネルに接続している時間を表示します。
 - [ConnectionTime.plugin.js](https://gist.github.com/katabame/ef65c6379c8d50af8702c5932c6dbf5b)を参考にしました。

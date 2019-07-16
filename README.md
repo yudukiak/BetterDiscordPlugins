@@ -7,8 +7,8 @@ BetterDiscordの利用方法については各自調べてください。
 
 ## 使い方
 1. 【ブラウザ】下記の使いたいプラグイン名をクリック。
-2. 【ブラウザ】`Ctrlキー + Sキー`などでプラグインを保存。
-3. 【パソコン】「ファイル名を指定して実行(`Windowsキー + Rキー`)」にて`%appdata%\BetterDiscord\plugins`を入力。
+2. 【ブラウザ】<kbd><kbd>Ctrl</kbd>+<kbd>S</kbd></kbd>などでプラグインを保存。
+3. 【パソコン】「ファイル名を指定して実行(<kbd><kbd>Windows</kbd>+<kbd>R</kbd></kbd>)」にて`%appdata%\BetterDiscord\plugins`を入力。
 4. 【パソコン】開いたフォルダーへダウンロードしたプラグインを入れる。
 5. 【Discord】歯車マークから設定を開く。
 6. 【Discord】`Plugins`にて入れたプラグインを有効にする。設定が必要な場合は各種設定を行なう。

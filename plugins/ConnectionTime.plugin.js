@@ -29,8 +29,25 @@ ConnectionTime.prototype.countStart = function() {
 ConnectionTime.prototype.zeroPadding = function(value) {
   return value < 10 ? `0${value}` : value;
 };
+ConnectionTime.prototype.update = function() {
+  const url = `https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/${this.getName()}.plugin.js`;
+  let libraryScript = document.getElementById('ZLibraryScript');
+  if (!libraryScript || !window.ZLibrary) {
+    if (libraryScript) libraryScript.parentElement.removeChild(libraryScript);
+    libraryScript = document.createElement('script');
+    libraryScript.setAttribute('type', 'text/javascript');
+    libraryScript.setAttribute('src', 'https://rauenzi.github.io/BDPluginLibrary/release/ZLibrary.js');
+    libraryScript.setAttribute('id', 'ZLibraryScript');
+    document.head.appendChild(libraryScript);
+  }
+  if (window.ZLibrary) ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), url);
+  else libraryScript.addEventListener('load', () => {
+    ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), url);
+  });
+};
 ConnectionTime.prototype.start = function() {
   this.log('start', this.getVersion());
+  this.update();
   clearInterval(timer);
   timer = setInterval(this.countStart, 1000); // 通話中に更新した場合の対応
 };
@@ -57,5 +74,5 @@ ConnectionTime.prototype.observer = function(e) {
 };
 ConnectionTime.prototype.getName = () => 'ConnectionTime';
 ConnectionTime.prototype.getDescription = () => lang === 'ja' ? 'ボイスチャンネルに接続している時間を表示します。' : 'Displays how long connected to VoiceChannel.';
-ConnectionTime.prototype.getVersion = () => '1.0.0';
+ConnectionTime.prototype.getVersion = () => '1.1.0';
 ConnectionTime.prototype.getAuthor = () => 'micelle';

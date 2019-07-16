@@ -23,8 +23,25 @@ ChangeTimestamp.prototype.whatTimeIsIt = function(t) {
   const text = `${month}月${day}日(${weekStr}) ${hours}時${minutes}分`;
   return (year === nowYear) ? text : `${year}年${text}`;
 };
+ChangeTimestamp.prototype.update = function() {
+  const url = `https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/${this.getName()}.plugin.js`;
+  let libraryScript = document.getElementById('ZLibraryScript');
+  if (!libraryScript || !window.ZLibrary) {
+    if (libraryScript) libraryScript.parentElement.removeChild(libraryScript);
+    libraryScript = document.createElement('script');
+    libraryScript.setAttribute('type', 'text/javascript');
+    libraryScript.setAttribute('src', 'https://rauenzi.github.io/BDPluginLibrary/release/ZLibrary.js');
+    libraryScript.setAttribute('id', 'ZLibraryScript');
+    document.head.appendChild(libraryScript);
+  }
+  if (window.ZLibrary) ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), url);
+  else libraryScript.addEventListener('load', () => {
+    ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), url);
+  });
+};
 ChangeTimestamp.prototype.start = function() {
   this.log('start', this.getVersion());
+  this.update();
 };
 ChangeTimestamp.prototype.load = function() {
   this.log('load', this.getVersion());
@@ -68,5 +85,5 @@ ChangeTimestamp.prototype.getDescription = function() {
   const oldTime = this.whatTimeIsIt(oldDate);
   return `チャットの日付を「${nowTime}」表記にします。\n昨年以前の場合は「${oldTime}」表記になります。`;
 };
-ChangeTimestamp.prototype.getVersion = () => '1.0.4';
+ChangeTimestamp.prototype.getVersion = () => '1.1.0';
 ChangeTimestamp.prototype.getAuthor = () => 'micelle';

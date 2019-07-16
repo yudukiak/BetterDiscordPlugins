@@ -8,8 +8,25 @@ ReplaceGifIcon.prototype.log = function(msg, data) {
   const name = this.getName();
   console.log(`%c[${name}] ${msg}`, 'color:#C9242F', data);
 };
+ReplaceGifIcon.prototype.update = function() {
+  const url = `https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/${this.getName()}.plugin.js`;
+  let libraryScript = document.getElementById('ZLibraryScript');
+  if (!libraryScript || !window.ZLibrary) {
+    if (libraryScript) libraryScript.parentElement.removeChild(libraryScript);
+    libraryScript = document.createElement('script');
+    libraryScript.setAttribute('type', 'text/javascript');
+    libraryScript.setAttribute('src', 'https://rauenzi.github.io/BDPluginLibrary/release/ZLibrary.js');
+    libraryScript.setAttribute('id', 'ZLibraryScript');
+    document.head.appendChild(libraryScript);
+  }
+  if (window.ZLibrary) ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), url);
+  else libraryScript.addEventListener('load', () => {
+    ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), url);
+  });
+};
 ReplaceGifIcon.prototype.start = function() {
   this.log('start', this.getVersion());
+  this.update();
 };
 ReplaceGifIcon.prototype.load = function() {
   this.log('load', this.getVersion());
@@ -52,5 +69,5 @@ ReplaceGifIcon.prototype.observer = function(e) {
 };
 ReplaceGifIcon.prototype.getName = () => 'ReplaceGifIcon';
 ReplaceGifIcon.prototype.getDescription = () => lang === 'ja' ? 'GIFアニメーションのアイコンに置き換えます。' : 'Replace with an GIF animated icon.';
-ReplaceGifIcon.prototype.getVersion = () => '1.0.3';
+ReplaceGifIcon.prototype.getVersion = () => '1.1.0';
 ReplaceGifIcon.prototype.getAuthor = () => 'micelle';

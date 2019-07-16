@@ -14,6 +14,9 @@ BetterDiscordの利用方法については各自調べてください。
 6. 【Discord】`Plugins`にて入れたプラグインを有効にする。設定が必要な場合は各種設定を行なう。
 
 ## プラグイン
+![update](https://prfac.com/wp-content/uploads/2019/07/0d40a5e4a645fc6b96e767d64ac0878e-3.jpg)
+- 全てのプラグインに自動更新機能が付いています。  
+  バージョンアップがあると上部にお知らせが出ますので、プラグイン名をクリックすることで更新が完了となります。
 
 ### v1.0.4 [ChangeTimestamp.plugin.js](https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/ChangeTimestamp.plugin.js)
 ![ChangeTimestamp](https://prfac.com/wp-content/uploads/2019/07/0d40a5e4a645fc6b96e767d64ac0878e-1.jpg)

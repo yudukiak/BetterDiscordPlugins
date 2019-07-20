@@ -24,9 +24,58 @@ ReplaceGifIcon.prototype.update = function() {
     ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), url);
   });
 };
+ReplaceGifIcon.prototype.addStyle = function() {
+  const styleId = this.getName() + '-style';
+  if (document.getElementById(styleId)) return;
+  const head = document.getElementsByTagName('head')[0];
+  const style = document.createElement('style');
+  const css = 'div.da-avatar:before{display:none}';
+  const rule = document.createTextNode(css);
+  style.id = styleId;
+  style.type = 'text/css';
+  style.appendChild(rule);
+  head.appendChild(style);
+};
+ReplaceGifIcon.prototype.replaceImage = function(elm) {
+  // .da-avatar: アイコン, .da-avatarSmall: 通話中のリスト
+  elm.find('img.da-avatar, .da-avatarSmall').each((index, element) => {
+    const name = this.getName();
+    if ($(element).data(name)) return;
+    $(element).data(name, true);
+    const URL = (() => {
+      const style = $(element).css('background-image');
+      if (/\.(png|webp)/.test(style)) return style.match(/url\("(.+)"\)/)[1];
+      if ($(element).hasClass('da-avatar')) return $(element).attr('src');
+      return null;
+    })();
+    if (URL == null || /\.gif/.test(URL)) return;
+    const gifURL = URL.replace(/\.(png|webp)/, '.gif'); // 画像のURLをGIF用に置換
+    const fileName = URL.match(/\/([^/]*)\.(png|webp)/)[1]; // ファイル名を抜き出す
+    if (!/cdn\.discordapp\.com/.test(gifURL) || this.errorList[fileName]) return;
+    const image = new Image();
+    image.src = gifURL;
+    image.onload = () => {
+      if ($(element).hasClass('da-avatarSmall')) {
+        this.log('element', element);
+        $(element).css('background-image', `url(${gifURL})`);
+      } else {
+        const elmClass = $(element).attr('class');
+        const div = $("<div></div>").addClass(elmClass).css({
+          "background-color": "#18191c",
+          "background-size": "100%",
+          "background-image": `url(${gifURL})`
+        });
+        $(element).parent().html(div);
+      }
+    };
+    image.onerror = () => this.errorList[fileName] = 1;
+  });
+};
 ReplaceGifIcon.prototype.start = function() {
   this.log('start', this.getVersion());
   this.update();
+  this.addStyle();
+  this.replaceImage($('body'));
 };
 ReplaceGifIcon.prototype.load = function() {
   this.log('load', this.getVersion());
@@ -40,34 +89,9 @@ ReplaceGifIcon.prototype.stop = function() {
 ReplaceGifIcon.prototype.onMessage = function() {};
 ReplaceGifIcon.prototype.onSwitch = function() {};
 ReplaceGifIcon.prototype.observer = function(e) {
-  // .da-image: アイコン, .da-avatarSmall: 通話中のリスト, .stop-animation: 自分のアイコン
-  $('.da-image, .da-avatarSmall, .stop-animation').each((index, element) => {
-    // チェック済みは処理しない
-    const name = this.getName();
-    if ($(element).data(name)) return;
-    $(element).data(name, true);
-    // styleを持ってなければ処理しない
-    const style = $(element).css('background-image');
-    if (!/\.(png|webp)/.test(style)) return;
-    // 画像のチェック
-    const URL = style.match(/url\("(.+)"\)/)[1]; // 画像のURLを抜き出す
-    const gifURL = URL.replace(/\.(png|webp)/, '.gif'); // 画像のURLをGIF用に置換
-    const fileName = URL.match(/\/([^/]*)\.(png|webp)/)[1]; // ファイル名を抜き出す
-    if (!/cdn\.discordapp\.com/.test(gifURL)) return; // デフォルトアイコンは処理しない
-    if (this.errorList[fileName]) return; // errorListに居たら処理しない
-    // 画像の読み込み
-    const image = new Image();
-    image.src = gifURL;
-    image.style = 'width:100%';
-    image.onload = () => {
-      ($(element).hasClass('da-avatarSmall'))
-      ? $(element).css('background-image', `url(${gifURL})`)
-      : $(element).css('overflow', 'hidden').html(image);
-    };
-    image.onerror = () => this.errorList[fileName] = 1;
-  });
+  this.replaceImage($(e.target));
 };
 ReplaceGifIcon.prototype.getName = () => 'ReplaceGifIcon';
 ReplaceGifIcon.prototype.getDescription = () => lang === 'ja' ? 'GIFアニメーションのアイコンに置き換えます。' : 'Replace with an GIF animated icon.';
-ReplaceGifIcon.prototype.getVersion = () => '1.1.0';
+ReplaceGifIcon.prototype.getVersion = () => '1.1.1';
 ReplaceGifIcon.prototype.getAuthor = () => 'micelle';

@@ -92,5 +92,5 @@ ReplaceGifIcon.prototype.observer = function(e) {
 };
 ReplaceGifIcon.prototype.getName = () => 'ReplaceGifIcon';
 ReplaceGifIcon.prototype.getDescription = () => lang === 'ja' ? 'GIFアニメーションのアイコンに置き換えます。' : 'Replace with an GIF animated icon.';
-ReplaceGifIcon.prototype.getVersion = () => '1.1.2';
+ReplaceGifIcon.prototype.getVersion = () => '1.1.3';
 ReplaceGifIcon.prototype.getAuthor = () => 'micelle';

@@ -56,7 +56,6 @@ ReplaceGifIcon.prototype.replaceImage = function(elm) {
     image.src = gifURL;
     image.onload = () => {
       if ($(element).hasClass('da-avatarSmall')) {
-        this.log('element', element);
         $(element).css('background-image', `url(${gifURL})`);
       } else {
         const elmClass = $(element).attr('class');
@@ -93,5 +92,5 @@ ReplaceGifIcon.prototype.observer = function(e) {
 };
 ReplaceGifIcon.prototype.getName = () => 'ReplaceGifIcon';
 ReplaceGifIcon.prototype.getDescription = () => lang === 'ja' ? 'GIFアニメーションのアイコンに置き換えます。' : 'Replace with an GIF animated icon.';
-ReplaceGifIcon.prototype.getVersion = () => '1.1.1';
+ReplaceGifIcon.prototype.getVersion = () => '1.1.2';
 ReplaceGifIcon.prototype.getAuthor = () => 'micelle';

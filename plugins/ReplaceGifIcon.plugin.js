@@ -48,7 +48,7 @@ ReplaceGifIcon.prototype.replaceImage = function(elm) {
       if ($(element).hasClass('da-avatar')) return $(element).attr('src');
       return null;
     })();
-    if (URL == null || /\.gif/.test(URL)) return;
+    if (URL == null || /\.gif/.test(URL) || !/^https?/.test(URL)) return;
     const gifURL = URL.replace(/\.(png|webp)/, '.gif'); // 画像のURLをGIF用に置換
     const fileName = URL.match(/\/([^/]*)\.(png|webp)/)[1]; // ファイル名を抜き出す
     if (!/cdn\.discordapp\.com/.test(gifURL) || this.errorList[fileName]) return;

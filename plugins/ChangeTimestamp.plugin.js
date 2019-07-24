@@ -23,8 +23,8 @@ ChangeTimestamp.prototype.whatTimeIsIt = function(t) {
   const text = `${month}月${day}日(${weekStr}) ${hours}時${minutes}分`;
   return (year === nowYear) ? text : `${year}年${text}`;
 };
-ChangeTimestamp.prototype.update = function() {
-  const url = `https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/${this.getName()}.plugin.js`;
+ChangeTimestamp.prototype.update = function(url) {
+  //const url = `https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/${this.getName()}.plugin.js`;
   let libraryScript = document.getElementById('ZLibraryScript');
   if (!libraryScript || !window.ZLibrary) {
     if (libraryScript) libraryScript.parentElement.removeChild(libraryScript);
@@ -41,7 +41,19 @@ ChangeTimestamp.prototype.update = function() {
 };
 ChangeTimestamp.prototype.start = function() {
   this.log('start', this.getVersion());
-  this.update();
+  //this.update();
+  const oldURL = `https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/${this.getName()}.plugin.js`;
+  const newURL = `https://micelle.github.io/BetterDiscordPlugins/plugins/${this.getName()}.plugin.js`;
+  $.ajax({
+    url: newURL,
+    type: 'GET'
+  })
+  .done((data) => {
+    ChangeTimestamp.prototype.update(newURL);
+  })
+  .fail((data) => {
+    ChangeTimestamp.prototype.update(oldURL);
+  });
 };
 ChangeTimestamp.prototype.load = function() {
   this.log('load', this.getVersion());
@@ -85,5 +97,5 @@ ChangeTimestamp.prototype.getDescription = function() {
   const oldTime = this.whatTimeIsIt(oldDate);
   return `チャットの日付を「${nowTime}」表記にします。\n昨年以前の場合は「${oldTime}」表記になります。`;
 };
-ChangeTimestamp.prototype.getVersion = () => '1.1.0';
+ChangeTimestamp.prototype.getVersion = () => '1.1.1';
 ChangeTimestamp.prototype.getAuthor = () => 'micelle';

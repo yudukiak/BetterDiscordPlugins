@@ -39,8 +39,8 @@ Twemoji.prototype.startScript = function() {
     twemoji.parse(document.body);
   } catch (e) {}
 };
-Twemoji.prototype.update = function(url) {
-  //const url = `https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/${this.getName()}.plugin.js`;
+Twemoji.prototype.update = function() {
+  const url = `https://micelle.github.io/BetterDiscordPlugins/plugins/${this.getName()}.plugin.js`
   let libraryScript = document.getElementById('ZLibraryScript');
   if (!libraryScript || !window.ZLibrary) {
     if (libraryScript) libraryScript.parentElement.removeChild(libraryScript);
@@ -57,19 +57,7 @@ Twemoji.prototype.update = function(url) {
 };
 Twemoji.prototype.start = function() {
   this.log('start', this.getVersion());
-  //this.update();
-  const oldURL = `https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/${this.getName()}.plugin.js`;
-  const newURL = `https://micelle.github.io/BetterDiscordPlugins/plugins/${this.getName()}.plugin.js`;
-  $.ajax({
-    url: newURL,
-    type: 'GET'
-  })
-  .done((data) => {
-    Twemoji.prototype.update(newURL);
-  })
-  .fail((data) => {
-    Twemoji.prototype.update(oldURL);
-  });
+  this.update();
   this.addScript();
 };
 Twemoji.prototype.load = function() {
@@ -91,5 +79,5 @@ Twemoji.prototype.observer = function(e) {
 };
 Twemoji.prototype.getName = () => 'Twemoji';
 Twemoji.prototype.getDescription = () => lang === 'ja' ? '絵文字をTwemojiで置換。' : 'Replace Emoji with Twemoji.';
-Twemoji.prototype.getVersion = () => '1.1.1';
+Twemoji.prototype.getVersion = () => '1.1.2';
 Twemoji.prototype.getAuthor = () => 'micelle';

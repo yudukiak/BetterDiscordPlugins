@@ -11,16 +11,14 @@ ConnectionTime.prototype.log = function(msg, data) {
 };
 ConnectionTime.prototype.countStart = function() {
   const This = ConnectionTime.prototype; // thisがglobalになるので指定する
-  const $elm = $('.da-rtcConnectionStatusConnected');
+  const $elm = $('.da-rtcConnectionStatus');
   if ($elm.length) {
     second++;
-    const hms = (() => {
-      const h = This.zeroPadding(second / 3600 | 0);
-      const m = This.zeroPadding(second % 3600 / 60 | 0);
-      const s = This.zeroPadding(second % 60);
-      return lang === 'ja' ? `${h}時間${m}分${s}秒` : `${h}h${m}m${s}s`;
-    })();
-    $elm.children('.da-description').children('span').text(hms);
+    const h = This.zeroPadding(second / 3600 | 0);
+    const m = This.zeroPadding(second % 3600 / 60 | 0);
+    const s = This.zeroPadding(second % 60);
+    const hms = (lang === 'ja') ? `${h}時間${m}分${s}秒` : `${h}h${m}m${s}s`;
+    $elm.children('.da-labelWrapper').children('.da-title').text(hms);
   } else {
     clearInterval(timer);
     second = 0;
@@ -29,8 +27,8 @@ ConnectionTime.prototype.countStart = function() {
 ConnectionTime.prototype.zeroPadding = function(value) {
   return value < 10 ? `0${value}` : value;
 };
-ConnectionTime.prototype.update = function(url) {
-  //const url = `https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/${this.getName()}.plugin.js`;
+ConnectionTime.prototype.update = function() {
+  const url = `https://micelle.github.io/BetterDiscordPlugins/plugins/${this.getName()}.plugin.js`
   let libraryScript = document.getElementById('ZLibraryScript');
   if (!libraryScript || !window.ZLibrary) {
     if (libraryScript) libraryScript.parentElement.removeChild(libraryScript);
@@ -47,19 +45,7 @@ ConnectionTime.prototype.update = function(url) {
 };
 ConnectionTime.prototype.start = function() {
   this.log('start', this.getVersion());
-  //this.update();
-  const oldURL = `https://raw.githubusercontent.com/micelle/dc_BetterDiscordPlugins/master/plugins/${this.getName()}.plugin.js`;
-  const newURL = `https://micelle.github.io/BetterDiscordPlugins/plugins/${this.getName()}.plugin.js`;
-  $.ajax({
-    url: newURL,
-    type: 'GET'
-  })
-  .done((data) => {
-    ConnectionTime.prototype.update(newURL);
-  })
-  .fail((data) => {
-    ConnectionTime.prototype.update(oldURL);
-  });
+  this.update();
   clearInterval(timer);
   timer = setInterval(this.countStart, 1000); // 通話中に更新した場合の対応
 };
@@ -79,12 +65,12 @@ ConnectionTime.prototype.onMessage = function() {};
 ConnectionTime.prototype.onSwitch = function() {};
 ConnectionTime.prototype.observer = function(e) {
   const classList = e.target.classList;
-  if (!classList || !/da-rtcConnectionStatusConnected/.test(classList.value)) return;
+  if (!classList || !/da-rtcConnectionStatus/.test(classList.value)) return;
   clearInterval(timer);
   second = 0; // 新たな通話に入ったのでリセット
   timer = setInterval(this.countStart, 1000);
 };
 ConnectionTime.prototype.getName = () => 'ConnectionTime';
 ConnectionTime.prototype.getDescription = () => lang === 'ja' ? 'ボイスチャンネルに接続している時間を表示します。' : 'Displays how long connected to VoiceChannel.';
-ConnectionTime.prototype.getVersion = () => '1.1.1';
+ConnectionTime.prototype.getVersion = () => '1.1.2';
 ConnectionTime.prototype.getAuthor = () => 'micelle';

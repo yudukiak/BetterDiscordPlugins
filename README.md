@@ -3,7 +3,8 @@ BetterDiscordのプラグイン
 
 [BetterDiscord](https://github.com/rauenzi/BetterDiscordApp/releases)で利用できるプラグインです。
 
-BetterDiscordの利用方法については各自調べてください。
+BetterDiscordの利用方法については各自調べてください。  
+**<img src="https://raw.githubusercontent.com/wiki/micelle/DiSpeak/images/26a0.png" alt="warning" height="25"> BetterDiscordの利用は[DiscordのToS（利用規約）](https://discordapp.com/terms)に引っかかるので自己責任でお願いします。 <img src="https://raw.githubusercontent.com/wiki/micelle/DiSpeak/images/26a0.png" alt="warning" height="25">**
 
 ## 使い方
 1. 【ブラウザ】下記の使いたいプラグイン名をクリック。

@@ -48,3 +48,14 @@ BetterDiscordの利用方法については各自調べてください。
 - 設定はありません。
 - Replace Emoji with Twemoji.
 - Support English.
+
+### [ShortcutCommands.plugin.js](https://raw.githubusercontent.com/micelle/BetterDiscordPlugins/master/plugins/ShortcutCommands.plugin.js)
+![ShortcutCommands](https://prfac.com/wp-content/uploads/2019/11/ezgif-3-81e36935a1ea.gif)
+![ShortcutCommands Setting](https://prfac.com/wp-content/uploads/2019/11/ezgif-3-fbf01c2c9dfc.gif)
+- クリックだけでBOTのコマンドを打てるようになります。
+- 設定について  
+  - `category:タイトル`を登録することでカテゴリー別に表示できるようになります。
+  - `BOTのコマンド`を登録することで新たなボタンが表示されます。入力できる文字に制限はありません。
+  - 設定は自動的に保存されます。
+- かなり汚いコードなのでいつか調整します…。
+- Not support English.

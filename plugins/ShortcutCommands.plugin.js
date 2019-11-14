@@ -12,7 +12,7 @@ class ShortcutCommands {
     return 'コマンド入力を少し楽にしてくれます。';
   }
   getVersion() {
-    return '1.0.0';
+    return '1.0.1';
   }
   getAuthor() {
     return 'micelle';
@@ -58,7 +58,7 @@ class ShortcutCommands {
             </div>
           </div>
         </div>`;
-      $('.da-layerContainer').html(buttonItemsHtml);
+      $('#app-mount > [data-no-focus-lock] > .da-layerContainer').html(buttonItemsHtml);
     });
     // コマンド入力
     $(document).on('click', '#send-command button', function() {

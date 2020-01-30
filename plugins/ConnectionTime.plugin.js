@@ -18,7 +18,7 @@ ConnectionTime.prototype.countStart = function() {
     const m = This.zeroPadding(second % 3600 / 60 | 0);
     const s = This.zeroPadding(second % 60);
     const hms = (lang === 'ja') ? `${h}時間${m}分${s}秒` : `${h}h${m}m${s}s`;
-    $elm.children('.da-labelWrapper').children('.da-title').text(hms);
+    $elm.children(".da-labelWrapper").children('.da-statusWithPopout').children('.da-contents').text(hms);
   } else {
     clearInterval(timer);
     second = 0;

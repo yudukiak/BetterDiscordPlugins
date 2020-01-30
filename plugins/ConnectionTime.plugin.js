@@ -18,7 +18,7 @@ ConnectionTime.prototype.countStart = function() {
     const m = This.zeroPadding(second % 3600 / 60 | 0);
     const s = This.zeroPadding(second % 60);
     const hms = (lang === 'ja') ? `${h}時間${m}分${s}秒` : `${h}h${m}m${s}s`;
-    $elm.children(".da-labelWrapper").children('.da-statusWithPopout').children('.da-contents').text(hms);
+    $elm.children('.da-labelWrapper').children('.da-statusWithPopout').children('.da-contents').text(hms);
   } else {
     clearInterval(timer);
     second = 0;
@@ -72,5 +72,5 @@ ConnectionTime.prototype.observer = function(e) {
 };
 ConnectionTime.prototype.getName = () => 'ConnectionTime';
 ConnectionTime.prototype.getDescription = () => lang === 'ja' ? 'ボイスチャンネルに接続している時間を表示します。' : 'Displays how long connected to VoiceChannel.';
-ConnectionTime.prototype.getVersion = () => '1.1.2';
+ConnectionTime.prototype.getVersion = () => '1.1.3';
 ConnectionTime.prototype.getAuthor = () => 'micelle';

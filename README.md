@@ -53,6 +53,12 @@ BetterDiscordのプラグイン
 - Replace Emoji with Twemoji.
 - Support English.
 
+## 開発中止のプラグイン
+Discordのアップデートにより、利用できなくなったプラグインです。
+
+<details>
+<summary>開発中止のプラグインを見る</summary>
+
 ### [ShortcutCommands.plugin.js](https://raw.githubusercontent.com/micelle/BetterDiscordPlugins/master/plugins/ShortcutCommands.plugin.js)
 ![ShortcutCommands](https://prfac.com/wp-content/uploads/2019/11/ezgif-3-81e36935a1ea.gif)
 ![ShortcutCommands Setting](https://prfac.com/wp-content/uploads/2019/11/ezgif-3-fbf01c2c9dfc.gif)
@@ -63,3 +69,5 @@ BetterDiscordのプラグイン
   - 設定は自動的に保存されます。
 - かなり汚いコードなのでいつか調整します…。
 - Not support English.
+
+</details>

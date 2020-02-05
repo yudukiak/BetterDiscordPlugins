@@ -14,14 +14,17 @@ ChangeTimestamp.prototype.whatTimeIsIt = function(t) {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
+  const hours = this.zeroPadding(date.getHours());
+  const minutes = this.zeroPadding(date.getMinutes());
+  const seconds = this.zeroPadding(date.getSeconds());
   const week = date.getDay();
   const weekStr = ['日', '月', '火', '水', '木', '金', '土'][week];
   const nowYear = new Date().getFullYear();
-  const text = `${month}月${day}日(${weekStr}) ${hours}時${minutes}分`;
+  const text = `${month}月${day}日(${weekStr}) ${hours}:${minutes}`;
   return (year === nowYear) ? text : `${year}年${text}`;
+};
+ChangeTimestamp.prototype.zeroPadding = function(value) {
+  return value < 10 ? `0${value}` : value;
 };
 ChangeTimestamp.prototype.update = function() {
   const url = `https://micelle.github.io/BetterDiscordPlugins/plugins/${this.getName()}.plugin.js`
@@ -57,23 +60,35 @@ ChangeTimestamp.prototype.onSwitch = function() {};
 ChangeTimestamp.prototype.observer = function(e) {
   const target = e.target;
   const classList = target.classList;
-  if (classList != null && /da-(app|systemPad|directionColumn|layerContainer)/.test(classList.value)) {
-    $(target).find('time.da-timestampCozy, time.da-timestamp, .da-tooltip').each((index, element) => {
-      const text = $(element).text();
-      if (/\d+月\d+日\(.+\) \d+時\d+分/.test(text)) return;
-      if ($(element).hasClass('da-tooltip')) {
-        $('time.da-edited:hover').each((hoverIndex, hoverElement) => {
-          const date = $(hoverElement).attr('datetime');
-          const dateRep = this.whatTimeIsIt(date);
-          const html = $(element).context.outerHTML;
-          const htmlRep = html.replace(/<\/div>.+<\/div>/, `</div>${dateRep}</div>`);
-          $(element).parent().html(htmlRep);
-        });
-      } else {
-        const date = $(element).attr('datetime');
-        const dateRep = this.whatTimeIsIt(date);
-        $(element).text(dateRep);
-      }
+  if (classList != null) {
+    $(target).find('.da-timestampCozy, .da-timestamp, .da-tooltip').each((index, element) => {
+      // 2020年2月4日 火曜日 00:02 => 2月4日(火) 00時02分
+      /*
+      // クラッシュするので放置…
+      $('time.da-edited:hover').each((hoverIndex, hoverElement) => {
+        const html = target.innerHTML;
+        if (/\d+月\d+日\(.+\) \d+:\d+/.test(html) || !/\d+月\d+日 .+曜日 \d+:\d+/.test(html)) return;
+        const htmlRep = (function(){
+          if (html == null) return html;
+          const y = new Date().getFullYear() + '年';
+          const d = (new RegExp(y).test(html)) ? html.replace(new RegExp(y), '') : html;
+          const r = d.replace(/ (.)曜日/, '($1)');
+          return r;
+        })();
+        target.innerHTML = htmlRep;
+      });
+      */
+      const text = $(element).children().text();
+      if (/\d+月\d+日\(.+\) \d+:\d+/.test(text)) return;
+      const label = $(element).children().attr('aria-label');
+      const labelRep = (function(){
+        if (label == null) return label;
+        const y = new Date().getFullYear() + '年';
+        const d = (new RegExp(y).test(label)) ? label.replace(new RegExp(y), '') : label;
+        const r = d.replace(/ (.)曜日/, '($1)');
+        return r;
+      })();
+      if (label != null) $(element).children().text(labelRep);
     });
   }
 };
@@ -85,5 +100,5 @@ ChangeTimestamp.prototype.getDescription = function() {
   const oldTime = this.whatTimeIsIt(oldDate);
   return `チャットの日付を「${nowTime}」表記にします。\n昨年以前の場合は「${oldTime}」表記になります。`;
 };
-ChangeTimestamp.prototype.getVersion = () => '1.1.2';
+ChangeTimestamp.prototype.getVersion = () => '1.1.3';
 ChangeTimestamp.prototype.getAuthor = () => 'micelle';

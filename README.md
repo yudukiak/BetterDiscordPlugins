@@ -22,14 +22,6 @@ BetterDiscordのプラグイン
 - 全てのプラグインに自動更新機能が付いています。  
   バージョンアップがあると上部にお知らせが出ますので、プラグイン名をクリックすることで更新が完了となります。
 
-### [ChangeTimestamp.plugin.js](https://raw.githubusercontent.com/micelle/BetterDiscordPlugins/master/plugins/ChangeTimestamp.plugin.js)
-![ChangeTimestamp](https://prfac.com/wp-content/uploads/2019/07/0d40a5e4a645fc6b96e767d64ac0878e-1.jpg)
-- [ブログ](https://prfac.com/change-timestamp-in-message/)
-- チャットの日付を「1月1日(火) 10時30分」表記にします。  
-  昨年以前の場合は「2018年1月1日(月) 10時30分」表記になります。
-- 設定はありません。
-- Not support English.
-
 ### [ReplaceGifIcon.plugin.js](https://raw.githubusercontent.com/micelle/BetterDiscordPlugins/master/plugins/ReplaceGifIcon.plugin.js)
 ![ReplaceGifIcon](https://prfac.com/wp-content/uploads/2019/07/ezgif-1-333bbc239b4f.gif)
 - 静止画になっているアイコンを全てGIFアニメーションのアイコンに置き換えます。
@@ -54,7 +46,7 @@ BetterDiscordのプラグイン
 - Support English.
 
 ## 開発中止のプラグイン
-Discordのアップデートにより、利用できなくなったプラグインです。
+Discordのアップデートにより、利用できなくなったプラグイン・不要となったプラグインです。
 
 <details>
 <summary>開発中止のプラグインを見る</summary>
@@ -69,5 +61,15 @@ Discordのアップデートにより、利用できなくなったプラグイ�
   - 設定は自動的に保存されます。
 - かなり汚いコードなのでいつか調整します…。
 - Not support English.
+- ※利用できなくなったプラグインです
+
+### [ChangeTimestamp.plugin.js](https://raw.githubusercontent.com/micelle/BetterDiscordPlugins/master/plugins/ChangeTimestamp.plugin.js)
+![ChangeTimestamp](https://prfac.com/wp-content/uploads/2019/07/0d40a5e4a645fc6b96e767d64ac0878e-1.jpg)
+- [ブログ](https://prfac.com/change-timestamp-in-message/)
+- チャットの日付を「1月1日(火) 10時30分」表記にします。  
+  昨年以前の場合は「2018年1月1日(月) 10時30分」表記になります。
+- 設定はありません。
+- Not support English.
+- ※Discord側で対応されたプラグインです
 
 </details>

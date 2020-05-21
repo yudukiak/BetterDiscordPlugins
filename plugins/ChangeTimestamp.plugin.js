@@ -45,6 +45,13 @@ ChangeTimestamp.prototype.update = function() {
 ChangeTimestamp.prototype.start = function() {
   this.log('start', this.getVersion());
   this.update();
+  
+  // 開発終了のお知らせ
+  const title = '開発が終了しました';
+  const name = this.getName();
+  const version = this.getVersion();
+  const content = `${name} ${version}の開発は終了しました。本プラグインを削除お願いします。`;
+  BdApi.alert(title, content);
 };
 ChangeTimestamp.prototype.load = function() {
   this.log('load', this.getVersion());
@@ -58,6 +65,9 @@ ChangeTimestamp.prototype.stop = function() {
 ChangeTimestamp.prototype.onMessage = function() {};
 ChangeTimestamp.prototype.onSwitch = function() {};
 ChangeTimestamp.prototype.observer = function(e) {
+  
+  return; // 処理を終了
+  
   const target = e.target;
   const classList = target.classList;
   if (classList != null) {
@@ -100,5 +110,5 @@ ChangeTimestamp.prototype.getDescription = function() {
   const oldTime = this.whatTimeIsIt(oldDate);
   return `チャットの日付を「${nowTime}」表記にします。\n昨年以前の場合は「${oldTime}」表記になります。`;
 };
-ChangeTimestamp.prototype.getVersion = () => '1.1.3';
+ChangeTimestamp.prototype.getVersion = () => '1.1.4';
 ChangeTimestamp.prototype.getAuthor = () => 'micelle';
